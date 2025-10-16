@@ -1,0 +1,15 @@
+    services:
+      jellyfin:
+        image: jellyfin/jellyfin:latest
+        container_name: jellyfin
+        network_mode: host # Or use bridge mode with defined ports
+        volumes:
+          - ./config:/config # Persistent storage for configuration
+          - ./cache:/cache   # Cache for metadata, thumbnails, etc.
+          - ./media/movies:/media/movies:ro # Read-only access to your movies
+          - ./media/shows:/media/shows:ro   # Read-only access to your TV shows
+        environment:
+          - PUID=1000 # Replace with your user ID
+          - PGID=1000 # Replace with your group ID
+          - TZ=America/Argentina/Buenos_Aires # Replace with your timezone
+        restart: unless-stopped
