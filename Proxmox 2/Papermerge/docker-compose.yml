@@ -3,12 +3,13 @@ services:
   papermerge:
     image: papermerge/papermerge:latest
     environment:
+      TZ: America/Argentina/Buenos_Aires
       PAPERMERGE__SECURITY__SECRET_KEY: 12345
       PAPERMERGE__AUTH__USERNAME: admin
       PAPERMERGE__AUTH__PASSWORD: admin
       PAPERMERGE__DATABASE__URL: postgresql://coco:jumbo@db:5432/pmgdb
     ports:
-     - "8200:80"
+     - "8200:8000"
     depends_on:
       - db
       
