@@ -1,0 +1,21 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp" # For the web interface
+      # - "443:443/tcp" # Uncomment for HTTPS access to the web interface
+      # - "67:67/udp" # Uncomment if using Pi-hole as DHCP server
+    environment:
+      TZ: 'Your/Timezone' # e.g., 'Europe/London' or 'America/New_York'
+      WEBPASSWORD: 'your_secure_password' # Set a strong password for the web interface
+      # PIHOLE_DNS_: "1.1.1.1;1.0.0.1" # Example for Cloudflare DNS
+      # FTLCONF_dns_listeningMode: all # Uncomment if using Docker's default bridge network
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN # Required for Pi-hole's network functionality
+    restart: unless-stopped
