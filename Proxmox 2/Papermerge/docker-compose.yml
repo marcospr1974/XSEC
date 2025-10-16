@@ -1,7 +1,7 @@
 services:
 
   papermerge:
-    image: papermerge/papermerge:latest
+    image: papermerge/papermerge:3.5.1
     environment:
       TZ: America/Argentina/Buenos_Aires
       PAPERMERGE__SECURITY__SECRET_KEY: 12345
